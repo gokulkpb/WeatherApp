@@ -15,6 +15,8 @@ export class WeatherBoxComponent {
   cities: {location:string, id:string }[] = [];
   currentweather!: WeatherData;
   selectedCityId:string = ''
+  keywordcity:string = ''
+  citylist:string[] = []
 
   constructor(
     private weatherService: WeatherService
@@ -42,4 +44,27 @@ export class WeatherBoxComponent {
     })
   }
 
+  onChangeKeywordSearch():void{
+    console.log(this.keywordcity)
+    if(this.keywordcity == ""){
+      this.citylist = [];
+    }
+    else{
+      this.weatherService.getCityKeywordSearch(this.keywordcity).subscribe({
+        next:(data:WeatherData[]) =>{
+          if(data.length === 0)
+          {
+            this.citylist = ["No Match found"]  
+          }
+          else{
+            this.citylist = data.map((item:WeatherData) => item.location)
+          }
+          
+          
+          console.log(this.citylist)
+        }
+      })
+    }
+    
+  }
 }

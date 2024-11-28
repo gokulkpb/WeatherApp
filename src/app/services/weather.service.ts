@@ -22,4 +22,8 @@ export class WeatherService {
   getACityWeather(id:string): Observable<any>{
     return this.httpClient.get<WeatherData>(this.url + "/" + id);
   }
+
+  getCityKeywordSearch(str:string):Observable<any>{
+    return this.httpClient.get<WeatherData[]>(this.url + "?q=" + str);
+  }
 }

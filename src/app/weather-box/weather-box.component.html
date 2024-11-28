@@ -16,7 +16,14 @@
       <h1>Weather Dashboard</h1>
       <h3>Your Premium Weather Experience</h3>
     </div>
-
+<div>
+  <input type="text" [(ngModel)]="keywordcity" (input)="onChangeKeywordSearch()">
+  <ul *ngIf="citylist.length > 0">
+    <li *ngFor="let city of citylist">
+      {{ city }}
+    </li>
+  </ul>
+</div>
     <!-- City Selection Dropdown -->
     <div class="city-dropdown">
         <select class="form-select w-50 mx-auto" [(ngModel)]="selectedCityId" (change)="onChangeCity()">
